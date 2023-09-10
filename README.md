@@ -17,3 +17,6 @@ Quise mantenerlo simple, y por lo tanto, para utilizar este framework solo se ne
 
 ## Contribuciones
 Se aceptan contribuciones de cualquier tipo. Si tienes alguna sugerencia o mejora, no dudes en abrir una issue o enviar un pull request.
+
+## Licencia
+Este proyecto está licenciado bajo la licencia MIT. Esta licencia es de código abierto y permite que cualquiera utilice, modifique y distribuya el código libremente.
