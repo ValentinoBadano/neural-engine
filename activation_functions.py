@@ -4,13 +4,15 @@ import numpy as np
 
 # función de activación Sigmoide
 def sigmoid(x):
-    return 1 / (1 + np.exp(-x))
+	x = np.clip(x, -500, 500)     # evita el overflow
+	return 1 / (1 + np.exp(-x))
 
 # derivada de la función de activación Sigmoide
 def sigmoid_derivative(x):
+    x = np.clip(x, -1000, 1000)	  # evita el overflow
     return x * (1 - x)
 
-# función de activación ReLU (nidad lineal rectificada)
+# función de activación ReLU (unidad lineal rectificada)
 def relu(x):
     return np.maximum(0, x)
 
@@ -28,5 +30,5 @@ def tanh_derivative(x):
 
 # función de activación Softmax (para capas de salida en clasificación multiclase)
 def softmax(x):
-    exp_x = np.exp(x - np.max(x))  # evita problemas de desbordamiento
+    exp_x = np.exp(x - np.max(x))  # evita el overflow
     return exp_x / np.sum(exp_x, axis=0)
