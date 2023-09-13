@@ -1,20 +1,18 @@
 from layer import *
 from activation_layer import *
-from cost_functions import quadratic_error_derivative
+from cost_functions import quadratic_error, quadratic_error_derivative
 from activation_functions import sigmoid, sigmoid_derivative, tanh, tanh_derivative
+import matplotlib.pyplot as plt 
 
 """ 
 TODO:
 Crear ejemplos de datos
-Crear función de coste y su derivada
-Crear capas de activación (sigmoide, tanh?)
-Entrenar, entrenar, entrenar...
-crear algoritmo de entrenamiento mediante rp
+implementar descenso de gradiente minibatch 
  """
 
-# ejemplo con AND
+# ejemplo de datos
 val_x = np.array([[[0,0]], [[0,1]], [[1,0]], [[1,1]]])
-val_y = np.array([[[0]], [[0]], [[0]], [[1]]])
+val_y = np.array([[[0]], [[1]], [[1]], [[0]]])
 
 
 red = [Layer(2, 3), 
@@ -34,7 +32,7 @@ for x, y in zip(val_x, val_y):
 
 #          algoritmo de entrenamiento
 
-epochs = 1000 # número de veces que se "entrenará" al modelo
+epochs = 500 # número de veces que se "entrenará" al modelo
 
 for i in range(epochs):
     for x, y in zip(val_x, val_y):
@@ -44,6 +42,7 @@ for i in range(epochs):
         for capa in red:
             salida = capa.propagate(salida)
 
+        plt.plot(i, quadratic_error(salida, y), 'ro', color='blue', markersize=0.2)
         error = quadratic_error_derivative(y, salida)
 
         # prop. hacia atrás
@@ -58,3 +57,7 @@ for x, y in zip(val_x, val_y):
     for capa in red:
         salida = capa.propagate(salida)
     print(x, salida)
+
+plt.xlabel('Training')
+plt.ylabel('Loss')
+plt.show()
