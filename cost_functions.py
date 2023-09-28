@@ -1,6 +1,8 @@
+import numpy as np
+
 # Función de error cuadrático 
 def quadratic_error(x, y):
-	error = (y - x)**2
+	error = np.square(y - x)
 	return abs(error)
 
 # Derivada del error cuadrático 
